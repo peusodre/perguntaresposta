@@ -7,6 +7,8 @@
 
 <body>
 	
+	<div id='passage'></div>
+	
 	<div style='text-align: center; padding: 10px;'></div>
 		<input type="text" placeholder="Type something..." id="question">
         <button type="button" onclick="Submit();">Submit</button>
@@ -16,13 +18,19 @@
 	<!-- Place your code in the script tag below. You can also use an external .js file -->
 	
 	<script>
-		passage = "Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover without requiring special treatment.  Older people, and those with underlying medical problems like cardiovascular disease, diabetes, chronic respiratory disease, and cancer are more likely to develop serious illness.The best way to prevent and slow down transmission is to be well informed about the COVID-19 virus, the disease it causes and how it spreads. Protect yourself and others from infection by washing your hands or using an alcohol based rub frequently and not touching your face. The COVID-19 virus spreads primarily through droplets of saliva or discharge from the nose when an infected person coughs or sneezes, so it’s important that you also practice respiratory etiquette (for example, by coughing into a flexed elbow).";
-		
+		passage = "Gilberto Passos Gil Moreira born 26 June 1942, known professionally as Gilberto Gil , is a Brazilian singer, guitarist, and songwriter, known for both his musical innovation and political activism. From 2003 to 2008, he served as Brazils Minister of Culture in the administration of President Luiz Inácio Lula da Silva. Gils musical style incorporates an eclectic range of influences, including rock, Brazilian genres including samba, African music, and reggae. Gil started to play music as a child and was a teenager when he joined his first band. He began his career as a bossa nova musician and grew to write songs that reflected a focus on political awareness and social activism. He was a key figure in the Música popular brasileira and tropicália movements of the 1960s, alongside artists such as longtime collaborator Caetano Veloso. The Brazilian military regime that took power in 1964 saw both Gil and Veloso as a threat, and the two were held for nine months in 1969 before they were told to leave the country. Gil moved to London, but returned to Bahia in 1972 and continued his musical career, as well as working as a politician and environmental advocate.";
+		document.getElementById('passage').innerHTML = passage;
 		function Submit(){
 			question = document.getElementById('question').value;
 		qna.load().then(model => {
 			model.findAnswers(question, passage).then(answers => {
 			console.log(answers);
+			if(answers[0] == null){
+				document.getElementById('answer').innerHTML = "Please try again.";
+			}
+			else
+			document.getElementById('answer').innerHTML = answers[0].text;
+
 		});
 	});
 }
